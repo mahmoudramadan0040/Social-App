@@ -17,7 +17,7 @@ class User(db.Model,UserMixin):
     username = db.Column(db.String(50), nullable = False)
     email = db.Column(db.String(120), unique = True, nullable = False)
     password = db.Column(db.Text, nullable = False)
-    photo = db.Column(db.LargeBinary)
+    photo = db.Column(db.Text)
     friends = db.Column(ARRAY(db.Integer))
     posts = db.relationship('Post', backref='author', lazy=True, cascade='all,delete')
     

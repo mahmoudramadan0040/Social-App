@@ -13,7 +13,9 @@ app.config['SECRET_KEY'] = 'W9MZ9FbVYKXHPDVqpvtkl1i16dnU3MWr'
 #setting up the bcrypt
 bcrypt = Bcrypt(app)
 
-
+#setting an upload folder
+UPLOAD_FOLDER = '/static/images'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #setting up the database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:18501900@localhost:5432/flask_db'

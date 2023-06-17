@@ -11,13 +11,11 @@ def create_db():
 #run this function to post dummy data
 def post_user():
     with app.app_context():
-        photo = open('flask_images/R.png', 'rb')
-        photo_data = photo.read()
         user1 = User(
             username = 'karim.Maged',
             email = 'karim@yahoo.com',
             password = '123456',
-            photo = photo_data
+            photo = '/static/images/R.png'
             )
         db.session.add(user1)
         db.session.commit()
@@ -33,6 +31,9 @@ def post_post():
         db.session.add(post1)
         db.session.commit()
 
+def delete_db():
+    with app.app_context():
+        db.drop_all()
 
 if __name__ == '__main__':
     globals()[sys.argv[1]]()
