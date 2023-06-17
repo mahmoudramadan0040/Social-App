@@ -5,28 +5,28 @@ from flask_login import current_user,login_required,login_user,logout_user
 @app.route('/home')
 @app.route('/')
 def home():
-    return "hello world"
+    return "home"
 
 
 #login endpoint
 @app.route('/login')
 def login():
-    pass
+    return "login"
 
 # Register Endpoint
 @app.route('/register')
 def register():
-    pass
+    return "register"
 
 
 #profile endpoint
 @app.route('/profile')
 def profile():
-    pass
+    return render_template('profile.html')
 
 
 
 #friend requests endpoint
 @app.route('/friendrequests')
 def friend_requests():
-    pass
+    return "friend requests"
