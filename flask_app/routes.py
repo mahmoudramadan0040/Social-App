@@ -2,7 +2,7 @@ from flask import render_template,redirect,request,url_for
 from flask_app import bcrypt,login_manager,app,db
 from flask_login import current_user,login_required,login_user,logout_user
 from flask_app.models import User,Post
-from flask_app.forms import PostFrom 
+from flask_app.forms import PostFrom,Registration,LoginForm
 from PIL import Image
 from io import BytesIO
 #home endpoint
@@ -15,7 +15,9 @@ def home():
 #login endpoint
 @app.route('/login')
 def login():
-    return "login"
+    form = Registration()
+    context = {'form':form}
+    return render_template('login.html',**context)
 
 # Register Endpoint
 @app.route('/register')
@@ -32,11 +34,13 @@ def profile():
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
+        privacy = request.form['privacy']
         with app.app_context():
             post = Post(
                 title = title,
                 content = content,
-                user_id = test_user.id
+                user_id = test_user.id,
+                privacy = privacy
             )
             db.session.add(post)
             db.session.commit()
@@ -60,7 +64,7 @@ def create_post():
                 title=form.title.data,
                 content =form.content.data,
                 date_posted = form.date_posted.data,
-                user_id=1
+                user_id=1,
             )
             db.session.add(new_post)
             db.session.commit()
@@ -74,12 +78,12 @@ def list_post():
         print(posts)
     return render_template('posts/list.html',posts=posts)
     
-@app.route('/post/<int:id>')
-def get_post(id):
-    with app.app_content():
-        post =Post.query.filter_by(id=id).first()
-        if post:
-            return render_template('',post=post)
+# @app.route('/post/<int:id>')
+# def get_post(id):
+#     with app.app_content():
+#         post =Post.query.filter_by(id=id).first()
+#         if post:
+#             return render_template('',post=post)
 
 @app.route('/post/<int:id>/update',methods=['GET','POST'])  
 def update_post(id):

@@ -35,3 +35,4 @@ class Post(db.Model):
     content = db.Column(db.String(300))
     date_posted = db.Column(db.DateTime, nullable = False, default = datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    privacy = db.Column(db.String(1), default = 0)

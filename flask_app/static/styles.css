@@ -1,9 +1,6 @@
 body {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 .footer {
   /* position: absolute;
@@ -24,4 +21,19 @@ form.profile-form {
   margin-top: 25px;
   display: flex;
   flex-direction: column;
+}
+.main {
+  min-height: 100vh;
+}
+
+form.registration {
+  margin: auto;
+  border: solid;
+  min-width: fit-content;
+  width: 40vw;
+}
+
+div.flex {
+  display: flex;
+  justify-content: space-between;
 }

@@ -15,6 +15,14 @@
       <label for="content">Content</label>
       <input type="text" id="content" name="content" required>
    </div>
+   <div style="display: flex; justify-content: space-between;">
+    <label for="privacy">Privacy</label>
+    <select name="privacy" id="privacy">
+      <option value="0">Public</option>
+      <option value="1">Friends Only</option>
+      <option value="2">Only me</option>
+    </select>
+   </div>
     <input type="submit" value="add new post" class="btn btn-outline-secondary">
   </form>
 </div>
@@ -26,7 +34,7 @@
       <h5 class="card-title">{{ post.title }}</h5>
       <h6 class="card-subtitle mb-2 text-body-secondary"> {{ user.username }}</h6>
       <p class="card-text"> {{ post.content }} </p>
-      
+     
     </div>
   </div>
   {% endfor %}
