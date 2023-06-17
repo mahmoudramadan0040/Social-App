@@ -5,14 +5,13 @@ from flask_login import current_user,login_required,login_user,logout_user
 @app.route('/home')
 @app.route('/')
 def home():
-    pass
+    return "hello world"
 
 
 #login endpoint
 @app.route('/login')
 def login():
     pass
-
 
 # Register Endpoint
 @app.route('/register')
