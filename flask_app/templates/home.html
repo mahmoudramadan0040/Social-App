@@ -5,12 +5,38 @@
     <div class="row d-flex flex-wrap justify-content-between">
 
         <div class="col-lg-9 col-md-9 col-sm-6">
+            {% if current_user.is_authenticated %}
             <nav class="navbar bg-body-tertiary mb-5 sub_nav d-flex justify-content-between">
                 <button class="btn btn-sm btn-outline-primary ms-3 me-3" type="button">Create New Posts ! </button>
                 <button class="btn btn-sm btn-outline-primary ms-3 me-3" type="button"> Post Friends </button>
                 <button class="btn btn-sm btn-outline-primary ms-3 me-3" type="button"> All Posts </button>
             </nav>
+            {% endif %}
+            {% for post in posts %}
+            <div class="card mb-3" style="width:100%">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img  class="post-image me-2" src="https://cdn.shopify.com/s/files/1/0646/5051/0575/files/main-banner-1_1076x500.jpg?v=1654170706;"/>
+                        <div class="d-block title_date ">
+                            <div> {{post.User.username}} </div>
+                            <div style="font-size: smaller;font-weight: 400;"> {{post.Post.date_posted}}</div>
+                        </div>
+                    </div>
+                  
+                  <h4 class="card-subtitle mb-2 post_title ">{{post.Post.title}}</h4>
+                  <p class="card-text">{{post.Post.content}}</p>
+                </div>
+            </div>
+            {% endfor %}
 
+
+
+
+            
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 friend-request vh-100">
+            {% if current_user.is_authenticated %}
+            <h4 class="post_title"> Friends </h4>
             <div class="card mb-3" style="width:100%">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
@@ -20,23 +46,17 @@
                             <div style="font-size: smaller;font-weight: 400;"> 2016/03/14</div>
                         </div>
                     </div>
-                  
-                  <h4 class="card-subtitle mb-2 post_title ">Welcome to Egypt</h4>
-                  <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro rem facere iure reprehenderit nobis nostrum fuga aliquam magnam voluptas quo molestias praesentium, dolores dolorum ullam magni unde numquam minima iusto?</p>
+                    <div class="d-flex align-items-center mb-3">
+                        <img  class="post-image me-2" src="https://cdn.shopify.com/s/files/1/0646/5051/0575/files/main-banner-1_1076x500.jpg?v=1654170706;"/>
+                        <div class="d-block title_date ">
+                            <div> Mahmoud Ramadan </div>
+                            <div style="font-size: smaller;font-weight: 400;"> 2016/03/14</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {% endif %}
             
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 friend-request vh-100">
-            <div class="card" style="width: 15rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div>
         </div>
         
     </div>

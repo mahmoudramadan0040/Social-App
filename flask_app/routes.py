@@ -10,9 +10,24 @@ import os
 #home endpoint
 @app.route('/home')
 @app.route('/')
-@login_required
+# @login_required
 def home():
-    return "home"
+    with app.app_context():
+        print(current_user.is_authenticated)
+        if current_user.is_authenticated: 
+            posts = Post.query.filter_by(privacy = '1').all();
+            print(posts)
+        else :
+            posts = db.session.query(
+            Post,
+            User
+            )\
+            .join(User, Post.user_id == User.id and Post.privacy=='0')\
+            .all();
+            
+            print(posts)
+        
+    return render_template('home.html' ,posts=posts)
 
 
 #login endpoint
@@ -61,6 +76,7 @@ def register():
 @login_required
 def profile():
     test_user = User.query.filter_by( email = current_user.email).first()
+    
     test_post = Post.query.filter_by(user_id = test_user.id).all()
     context = {'user':test_user, 'posts':test_post}
     if request.method == 'POST':
