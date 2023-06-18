@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post" class="container mt-5 registration"  enctype="multipart/form-data">
+<form method="post" class="container mt-5 registration crate_form "  enctype="multipart/form-data">
   {{ form.hidden_tag() }}
   <fieldset class="registration">
-    <legend>Register Now</legend>
+    <legend class="text-center">Register Now</legend>
     <div class="flex">
       {{ form.username.label }}
       {% if form.username.errors %}

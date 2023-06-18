@@ -67,3 +67,68 @@ div.flex {
   border-radius: .3em;
   padding: .2em;
 }
+.crate_form{
+  width: fit-content;
+  min-width: 400px;
+  
+  margin: auto;
+  border:none;
+  box-shadow: 0px 30px 70px rgba(48, 150, 245, 0.1);
+
+}
+fieldset{
+  border: none;
+}
+form_title{
+  color:rgb(0, 121, 227);
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+
+}
+label{
+  color:rgb(0, 121, 227);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+legend{
+  color: rgb(0, 121, 227);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+.card_post{
+  width: fit-content;
+  min-width: 400px;
+  
+  margin: auto;
+  border:none;
+  box-shadow: 0px 30px 70px rgba(48, 150, 245, 0.1);
+}
+.card_post:hover{
+  width: fit-content;
+  min-width: 400px;
+  
+  margin: auto;
+  border:none;
+  box-shadow: 0px 30px 70px rgba(48, 150, 245, 0.1);
+  border: 1px solid  rgb(0, 121, 227);
+  height: max-content !important;
+}
+
+input{
+  border: 1px solid #cecece;
+  padding:.3em;
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+input:s{
+  border: 1px solid #cecece;
+}
+form_btn{
+    width: 100%;
+    border: none;
+    padding:1em;
+    color:white;
+    background-color: #000;
+    margin-top:2em;
+    font-size: 1.1em;
+}

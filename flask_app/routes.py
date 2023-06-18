@@ -26,13 +26,11 @@ def home():
             .outerjoin(User, User.id == Post.user_id)\
             .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
             
-            # myposts = []
-            # for post in current_user.posts:
-            #     x = (current_user,post)
-            #     myposts.append(x)
-                
-            # all_posts=[*posts,*myposts];
-            # print(all_posts);
+            friends = User.query.filter(User.id.in_(current_user.friends) ).all()
+            print(friends)
+            # all_posts=[*posts,*myposts]
+            # print(all_posts)
+            # posts =all_posts
             # posts = all_posts
             # print(posts)
             # myposts =db.session.query(
@@ -60,10 +58,11 @@ def home():
             )\
             .join(User, Post.user_id == User.id and Post.privacy=='0')\
             .all();
-            
+            friends=[]
             print(posts)
+            
         
-    return render_template('home.html' ,posts=posts)
+    return render_template('home.html' ,posts=posts,friends=friends)
 
 
 #login endpoint
@@ -156,11 +155,16 @@ def create_post():
     return render_template('posts/create.html',data={'form':form})
             
 @app.route('/posts',methods=['GET'])
+@login_required
 def list_post():
     with app.app_context():
-        posts =Post.query.all()
-        print(posts)
-    return render_template('posts/list.html',posts=posts)
+        posts = db.session.query(
+            Post,
+            User
+            )\
+            .join(User, Post.user_id == User.id and Post.privacy=='0')\
+            .all();
+    return render_template('home.html',posts=posts)
     
 # @app.route('/post/<int:id>')
 # def get_post(id):

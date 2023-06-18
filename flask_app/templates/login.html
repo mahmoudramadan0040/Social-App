@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="post" class="login">
+<form method="post" class="login crate_form mt-5">
   {{ form.hidden_tag() }}
   <fieldset>
-    <legend> Login </legend>
-    <div class="flex">
+    <legend class="text-center"> Login </legend>
+    <div class="flex ">
       {{ form.email.label }}
       {% if form.email.errors %}
-          {{ form.email(class="form-control is-invalid") }}
+          {{ form.email(class="form-control form_input is-invalid") }}
           <div class="invalid-feedback">
               {% for error in form.email.errors %}
                   <span>{{ error }}</span>
@@ -30,8 +30,8 @@
       {{ form.password }}
       {% endif %}
     </div>
-    <div class="flex">
-      {{ form.submit(class='btn btn-primary') }}
+    <div class="flex mt-3">
+      {{ form.submit(class='btn btn-primary ') }}
     </div>
   </fieldset>
 </form>
