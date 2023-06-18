@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <div class="flex">
+    {{ form.username.label }}
+    {% if form.username.errors %}
+        {{ form.username(class="form-control is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+    {% else %}
+        {{ form.username }}
+    {% endif %}
+  </div>
+  <div class="flex">
+    {{ form.photo.label }}
+    {% if form.photo.errors %}
+        {{ form.photo(class="form-control is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.photo.errors %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+    {% else %}
+    {{ form.photo }}
+    {% endif %}
+  </div>
+  <div class="flex">
+    {{ form.submit(class='btn btn-primary') }}
+  </div>
+</form>
+{% endblock %}

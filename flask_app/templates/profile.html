@@ -5,6 +5,7 @@
   <div class="picture" style="margin-left: 25px;">
     <img src="{{  user.photo }}" alt="test">
     <div>{{ user.username }}</div>
+    <a href="{{url_for('edit')}}" class="btn btn-dark"> edit </a>
   </div>
   <form method="post" class="profile-form">
     <div style="display: flex; justify-content: space-between;">

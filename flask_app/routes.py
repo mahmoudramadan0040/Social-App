@@ -3,7 +3,7 @@ from sqlalchemy import and_
 from flask_app import bcrypt,login_manager,app,db
 from flask_login import current_user,login_required,login_user,logout_user
 from flask_app.models import User,Post,FriendRequests
-from flask_app.forms import PostFrom,Registration,LoginForm
+from flask_app.forms import PostFrom,Registration,LoginForm,EditUserForm
 from werkzeug.utils import secure_filename
 import os
 
@@ -237,3 +237,20 @@ def ignore(id):
         db.session.delete(sender)
         db.session.commit()
         return redirect(url_for('friend_requests'))
+    
+@app.route('/edit',methods = ['GET','POST'])
+@login_required
+def edit():
+    form = EditUserForm(obj = current_user)
+    if form.validate_on_submit():
+        with app.app_context():
+            photo = form.photo.data
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            photo_path = f"/static/images/{filename}"
+            current_user.username = form.username.data
+            current_user.photo = photo_path
+            db.session.add(current_user)
+            db.session.commit()
+            return redirect(url_for('profile'))
+    return render_template('edit.html',form = form)

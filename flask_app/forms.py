@@ -87,3 +87,22 @@ class LoginForm(FlaskForm):
     submit = SubmitField(
         'Login'
     )
+
+class EditUserForm(FlaskForm):
+    username = StringField(
+        'username',
+        validators = [
+            DataRequired(),Length(min=5, max=50)
+        ]
+    )
+
+    photo = FileField(
+        'photo',
+        validators=[
+            FileRequired()
+        ]
+    )
+
+    submit = SubmitField(
+        'save'
+    )
