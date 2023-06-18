@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,DateField,TextAreaField,FileField,ValidationError
+from wtforms import StringField,PasswordField,SubmitField,DateField,TextAreaField,ValidationError
 from wtforms.validators import DataRequired,Length,Email,EqualTo
+from flask_wtf.file import FileField, FileRequired
 from flask_app.models import User
 class PostFrom(FlaskForm):
     title = StringField(
@@ -55,7 +56,7 @@ class Registration(FlaskForm):
     photo = FileField(
         'photo',
         validators=[
-            DataRequired()
+            FileRequired()
         ]
     )
     submit = SubmitField(
@@ -63,7 +64,7 @@ class Registration(FlaskForm):
     )
    
     def validate_email(self,email):
-        email = User.query.filter_by(email = email).first()
+        email = User.query.filter_by(email = email.data).first()
         if email:
             raise ValidationError("This email already exists, Please choose another email")
         

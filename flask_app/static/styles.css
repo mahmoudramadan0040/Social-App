@@ -6,7 +6,7 @@ body {
   /* position: absolute;
   bottom: 0; */
   display: flex;
-  justify-content: center;
+  align-items: center;
   margin-top: 30px;
 }
 
@@ -26,14 +26,20 @@ form.profile-form {
   min-height: 100vh;
 }
 
-form.registration {
+form.registration,
+form.login {
   margin: auto;
-  border: solid;
   min-width: fit-content;
   width: 40vw;
 }
 
+fieldset {
+  border: solid black 1px;
+  padding: 20px;
+}
+
 div.flex {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 }

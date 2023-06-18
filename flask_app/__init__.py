@@ -14,7 +14,7 @@ app.config['SECRET_KEY'] = 'W9MZ9FbVYKXHPDVqpvtkl1i16dnU3MWr'
 bcrypt = Bcrypt(app)
 
 #setting an upload folder
-UPLOAD_FOLDER = '/static/images'
+UPLOAD_FOLDER = '/home/karim/ITI/18-Flask/Flask_social_media/flask_app/static/images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #setting up the database

@@ -1,34 +1,66 @@
-from flask import render_template,redirect,request,url_for
+from flask import render_template,redirect,request,url_for,flash
 from flask_app import bcrypt,login_manager,app,db
 from flask_login import current_user,login_required,login_user,logout_user
 from flask_app.models import User,Post
 from flask_app.forms import PostFrom,Registration,LoginForm
-from PIL import Image
-from io import BytesIO
+from werkzeug.utils import secure_filename
+import os
+
+
 #home endpoint
 @app.route('/home')
 @app.route('/')
+@login_required
 def home():
     return "home"
 
 
 #login endpoint
-@app.route('/login')
+@app.route('/login',methods=['GET','POST'])
 def login():
-    form = Registration()
-    context = {'form':form}
+    form = LoginForm()
+    context = {'form': form}
+    if form.validate_on_submit():
+        with app.app_context():
+            user = User.query.filter_by(email = form.email.data).first()
+            if user:
+                    if user.check_password(form.password.data):
+                        login_user(user)
+                        flash("Login Successful!","success")
+                        return redirect(url_for('profile'))
+            else:
+                flash("Login Unsuccessful!","danger")
+                return redirect(url_for('login'))
     return render_template('login.html',**context)
 
 # Register Endpoint
-@app.route('/register')
+@app.route('/register',methods=['GET','POST'])
 def register():
-    return "register"
+    form = Registration()
+    context = {'form':form}
+    if form.validate_on_submit():
+        with app.app_context():
+            photo = form.photo.data
+            filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            photo_path = f"/static/images/{filename}"
+            new_user = User(username = form.username.data,
+                            password = form.password.data,
+                            email = form.email.data,
+                            photo = photo_path )
+            new_user.set_password(form.password.data)
+            db.session.add(new_user)
+            db.session.commit()
+            flash(f"Registration Successful for {form.username.data}!","success")
+            return redirect(url_for('login'))
+    return render_template('registration.html',**context)
 
 
 #profile endpoint
 @app.route('/profile',methods = ['GET','POST'])
+@login_required
 def profile():
-    test_user = User.query.first()
+    test_user = User.query.filter_by( email = current_user.email).first()
     test_post = Post.query.filter_by(user_id = test_user.id).all()
     context = {'user':test_user, 'posts':test_post}
     if request.method == 'POST':
