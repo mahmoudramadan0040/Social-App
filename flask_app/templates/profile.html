@@ -42,6 +42,10 @@
       <h4 class="card-subtitle mb-2 post_title ">{{ post.title }}</h4>
       <p class="card-text"> {{ post.content }} </p>
     </div>
+    <div>
+      <a href="/delete/post/{{post.id}}" class="btn btn-danger"> Delete </a>
+      <a href="/post/update/{{post.id}}" class="btn btn-warning"> Update </a>
+    </div>
 </div>
   {% endfor %}
 </div>
