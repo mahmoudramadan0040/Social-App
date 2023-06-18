@@ -2,7 +2,7 @@ from flask import render_template,redirect,request,url_for,flash
 from sqlalchemy import and_
 from flask_app import bcrypt,login_manager,app,db
 from flask_login import current_user,login_required,login_user,logout_user
-from flask_app.models import User,Post
+from flask_app.models import User,Post,FriendRequests
 from flask_app.forms import PostFrom,Registration,LoginForm
 from werkzeug.utils import secure_filename
 import os
@@ -135,7 +135,9 @@ def profile():
 #friend requests endpoint
 @app.route('/friendrequests')
 def friend_requests():
-    return "friend requests"
+    requests = FriendRequests.query.filter_by(reciever = current_user.id).all()
+    senders = User.query.join(FriendRequests, User.id == FriendRequests.sender).all()
+    return render_template('friendrequests.html',requests = senders)
 
 
 @app.route('/post/create',methods=['GET','POST'])
@@ -203,3 +205,53 @@ def delete(id):
         db.session.commit()
         return redirect(url_for('profile'))
     return render_template('delete.html')
+
+
+@app.route('/explore')
+@login_required
+def explore():
+    if current_user.friends:
+        users = User.query.filter(User.id != current_user.id)\
+        .filter(User.id.not_in(current_user.friends)).all()
+    else:
+         users = User.query.filter(User.id != current_user.id).all()
+    return render_template('explore.html',users = users)
+
+@app.route('/add/friend/<int:id>')
+@login_required
+def addFriend(id):
+    exist = FriendRequests.query.get((current_user.id, id))
+
+    if exist:
+        flash(f"You already sent friend request","danger")
+        return redirect(url_for('explore'))
+    else:
+       with app.app_context():
+            request = FriendRequests(sender = current_user.id,reciever = id)
+            db.session.add(request)
+            db.session.commit()
+            flash("firent request was send successfully","success")
+            return redirect(url_for('explore'))                  
+    
+@app.route('/accept/<int:id>')
+@login_required
+def accept(id):
+    with app.app_context():
+        sender = FriendRequests.query.get((id,current_user.id))
+        if not current_user.friends:
+           current_user.friends = [] 
+           current_user.friends.append(id)
+        else:
+           current_user.friends.append(id)
+        db.session.delete(sender)
+        db.session.commit()
+        return redirect(url_for('friend_requests'))
+    
+@app.route('/ignore/<int:id>')
+@login_required
+def ignore(id):
+    with app.app_context():
+        sender = FriendRequests.query.get((id,current_user.id))
+        db.session.delete(sender)
+        db.session.commit()
+        return redirect(url_for('friend_requests'))
