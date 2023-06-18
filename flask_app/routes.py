@@ -137,3 +137,8 @@ def update_post(id):
 #     if request.method == 'POST' :
         
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
