@@ -15,9 +15,6 @@ import os
 def home():
     with app.app_context():
         if current_user.is_authenticated: 
-            # posts = Post.query.join(User)\
-            #     .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
-            # user = User.query.filter(Post.user_id.in_(current_user.friends))
             if current_user.friends:
                 posts = db.session.query(User, Post)\
                     .outerjoin(User, User.id == Post.user_id)\
@@ -27,29 +24,7 @@ def home():
             
             friends = User.query.filter(User.id.in_(current_user.friends) ).all()
             print(friends)
-            # all_posts=[*posts,*myposts]
-            # print(all_posts)
-            # posts =all_posts
-            # posts = all_posts
-            # print(posts)
-            # myposts =db.session.query(
-            # Post,
-            # User
-            # )\
-            # .join(User, Post.user_id == current_user.id and Post.privacy.in_(["1","0"]))\
-            # .all();
-            # print(myposts)
-            # all_posts=[*posts,*myposts];
-            # print(all_posts)
-            # posts=all_posts
-            
-            
-            # posts = db.session.query(
-            # Post,
-            # User
-            # )\
-            # .join(User, Post.user_id == User.id and Post.privacy=='0')\
-            # .all();
+           
         else :
             posts = db.session.query(
             Post,
@@ -148,7 +123,7 @@ def create_post():
                 title=form.title.data,
                 content =form.content.data,
                 date_posted = form.date_posted.data,
-                user_id=1,
+                user_id=current_user.id,
             )
             db.session.add(new_post)
             db.session.commit()
@@ -242,6 +217,9 @@ def addFriend(id):
 def accept(id):
     with app.app_context():
         sender = FriendRequests.query.get((id,current_user.id))
+        print(sender);
+        print(id);
+        print(current_user.id);
         if not current_user.friends:
            current_user.friends = [] 
            current_user.friends.append(id)
