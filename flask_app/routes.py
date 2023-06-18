@@ -1,4 +1,5 @@
 from flask import render_template,redirect,request,url_for,flash
+from sqlalchemy import and_
 from flask_app import bcrypt,login_manager,app,db
 from flask_login import current_user,login_required,login_user,logout_user
 from flask_app.models import User,Post
@@ -13,10 +14,45 @@ import os
 # @login_required
 def home():
     with app.app_context():
-        print(current_user.is_authenticated)
         if current_user.is_authenticated: 
-            posts = Post.query.filter_by(privacy = '1').all();
-            print(posts)
+            print(tuple(current_user.friends))
+            dum= current_user.query.filter(Post.user_id in current_user.friends).all()
+            print(dum,"dsfsdf")
+            
+            # posts = Post.query.join(User)\
+            #     .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
+            # user = User.query.filter(Post.user_id.in_(current_user.friends))
+            posts = db.session.query(User, Post)\
+            .outerjoin(User, User.id == Post.user_id)\
+            .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
+            
+            # myposts = []
+            # for post in current_user.posts:
+            #     x = (current_user,post)
+            #     myposts.append(x)
+                
+            # all_posts=[*posts,*myposts];
+            # print(all_posts);
+            # posts = all_posts
+            # print(posts)
+            # myposts =db.session.query(
+            # Post,
+            # User
+            # )\
+            # .join(User, Post.user_id == current_user.id and Post.privacy.in_(["1","0"]))\
+            # .all();
+            # print(myposts)
+            # all_posts=[*posts,*myposts];
+            # print(all_posts)
+            # posts=all_posts
+            
+            
+            # posts = db.session.query(
+            # Post,
+            # User
+            # )\
+            # .join(User, Post.user_id == User.id and Post.privacy=='0')\
+            # .all();
         else :
             posts = db.session.query(
             Post,
