@@ -12,7 +12,7 @@ import os
 @app.route('/')
 @login_required
 def home():
-    return "home"
+    return render_template('home.html')
 
 
 #login endpoint

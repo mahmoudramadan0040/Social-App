@@ -29,14 +29,20 @@
 
 <div>
   {% for post in posts %}
-  <div class="card mt-2" style="width: 90vw; margin: auto;">
+  <div class="card mb-3" style="width:100%">
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
-      <h6 class="card-subtitle mb-2 text-body-secondary"> {{ user.username }}</h6>
+        <div class="d-flex align-items-center mb-3">
+            <img  class="post-image me-2" src="{{ current_user.photo }}"/>
+            <div class="d-block title_date ">
+                <div> {{ current_user.username }} </div>
+                <div style="font-size: smaller;font-weight: 400;"> {{ post.date_posted }} </div>
+            </div>
+        </div>
+      
+      <h4 class="card-subtitle mb-2 post_title ">{{ post.title }}</h4>
       <p class="card-text"> {{ post.content }} </p>
-     
     </div>
-  </div>
+</div>
   {% endfor %}
 </div>
 {% endblock %}
