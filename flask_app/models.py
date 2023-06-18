@@ -36,3 +36,9 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, nullable = False, default = datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     privacy = db.Column(db.String(1), default = 0)
+
+
+class FriendRequests(db.Model):
+    __tablename__ = 'friend_requests'
+    sender = db.Column(db.Integer, primary_key = True)
+    reciever = db.Column(db.Integer,primary_key = True)

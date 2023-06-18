@@ -1,2 +1,14 @@
 {% extends 'base.html' %}
+{% block content %}
+{% for request in requests %}
+<div class="card" style="width: 18rem;">
+  <img src="{{request.photo}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{request.username}}</h5>
+    <a href="/accept/{{request.id}}" class="btn btn-primary">accept</a>
+    <a href="/ignore/{{request.id}}" class="btn btn-danger">ignore</a>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
 
