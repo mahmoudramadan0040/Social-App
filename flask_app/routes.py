@@ -15,16 +15,15 @@ import os
 def home():
     with app.app_context():
         if current_user.is_authenticated: 
-            print(tuple(current_user.friends))
-            dum= current_user.query.filter(Post.user_id in current_user.friends).all()
-            print(dum,"dsfsdf")
-            
             # posts = Post.query.join(User)\
             #     .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
             # user = User.query.filter(Post.user_id.in_(current_user.friends))
-            posts = db.session.query(User, Post)\
-            .outerjoin(User, User.id == Post.user_id)\
-            .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
+            if current_user.friends:
+                posts = db.session.query(User, Post)\
+                    .outerjoin(User, User.id == Post.user_id)\
+                    .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
+            else:
+                posts = []
             
             # myposts = []
             # for post in current_user.posts:
