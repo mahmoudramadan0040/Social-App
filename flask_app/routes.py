@@ -133,7 +133,7 @@ def list_post():
 #         if post:
 #             return render_template('',post=post)
 
-@app.route('/post/<int:id>/update',methods=['GET','POST'])  
+@app.route('/post/update/<int:id>', methods=['GET','POST'])  
 def update_post(id):
     post= Post.query.filter_by(id=id).first()
     if post:
@@ -142,10 +142,10 @@ def update_post(id):
             form.populate_obj(post)
             db.session.add(post)
             db.session.commit()
-            return redirect(url_for('home'))
-        return render_template('posts/create.html', data={'form':form})
+            return redirect(url_for('profile'))
+        return render_template('/posts/create.html', data={'form':form})
     else:
-        return "Post not exists to update !"
+        return "Post does not exists to update !"
 
 # @app.route('/post/<int:id>/delete',methods=['GET','POST'])
 # def delete_post(id):
@@ -158,3 +158,13 @@ def update_post(id):
 def logout():
     logout_user()
     return redirect(url_for('login'))
+
+
+@app.route('/delete/post/<int:id>', methods=['GET','POST'])
+def delete(id):
+    if request.method == 'POST':
+        post = Post.query.filter_by(id = id).first()
+        db.session.delete(post)
+        db.session.commit()
+        return redirect(url_for('profile'))
+    return render_template('delete.html')
