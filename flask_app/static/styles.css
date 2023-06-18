@@ -43,3 +43,27 @@ div.flex {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.friend-request{
+  /* border-left: 2px solid #0D6EFD; */
+}
+.sub_nav{
+  border-radius: .4em;
+  background-color: #b0c8eb;
+  box-shadow: 2px 3px rgb(128, 179, 246)
+}
+.post-image{
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+.title_date{
+  line-height: 1em;
+}
+.post_title{
+  background-color: #f6f6f6;
+  color: rgb(0, 121, 227);
+  width: fit-content;
+  border-radius: .3em;
+  padding: .2em;
+}
