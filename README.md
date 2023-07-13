@@ -48,13 +48,13 @@ https://youtu.be/CREVECnXTY4
 
 ## How To run 
 1- create virtual environment using this command 
-> pip install virtualenv
-> python<version> -m venv [virtual-environment-name]
+    > pip install virtualenv
+    > python<version> -m venv [virtual-environment-name]
 2- install all requirement pakage using this command
-> pip install -r requirements.txt
+    > pip install -r requirements.txt
 3- add .env file then add this inside
-> FLASK_APP=start.py
-> FLASK_DEBUG=1
+    > FLASK_APP=start.py
+    > FLASK_DEBUG=1
 4- change connect string that inside __init__ file in project to connect string your Db
-> 'postgresql://postgres:[password]@localhost:5432/[database name ]'
+    > 'postgresql://postgres:[password]@localhost:5432/[database name ]'
 5- 
