@@ -17,17 +17,31 @@
 https://youtu.be/CREVECnXTY4
 
 ## Image Demo 
-> profile page 
+>> profile page 
 ![screencapture-127-0-0-1-5000-profile-2023-07-13-19_39_19](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/f2311131-a426-4517-9e42-4625ca9f078c)
 
-> login page 
+>> login page
+
 ![Capture2](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/fa5bfe06-e99a-488a-b343-69679ede0791)
-> register page
+
+>> register page
+
 ![Capture3](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/73ae8584-af77-447f-b63a-4e73913c5294)
-> home without login
+
+>> home without login
+
 ![Capture4](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/010a208d-5cd7-4d29-87f2-179c533e150b)
-> home after login
+
+>> home after login
+
 ![Capture](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/167e9475-d211-4278-90b3-0471acd8b41a)
 
+>> explore friends ( you can make friend request )
+
+![Capture5](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/d07c3e74-72a3-42fb-adcf-cef627327ef9)
+
+>> friend requests
+
+![Capture6](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/8010a5d7-efac-44b3-875e-468d48ca4cd0)
 
 
