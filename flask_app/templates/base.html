@@ -49,10 +49,11 @@
         {% if current_user.is_authenticated %}
         <div class="nav-item">
           <a class="nav-link text-light d-flex align-items-center justify-content-end" href="{{ url_for('profile') }}">
-            <img  class="post-image me-2" src="{{current_user.photo}}"/>
             <div class="d-block title_date ">
                 <div> {{current_user.username}} </div>
             </div>
+            <img  class="post-image me-2 ms-3" src="{{current_user.photo}}"/>
+
           </a>
         </div>
         {% endif %}

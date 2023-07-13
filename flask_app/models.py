@@ -2,7 +2,7 @@ from flask_app import db,login_manager,bcrypt
 from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy.dialects.postgresql import ARRAY
-
+from sqlalchemy.orm.attributes import flag_modified
 
 
 
@@ -20,7 +20,9 @@ class User(db.Model,UserMixin):
     photo = db.Column(db.Text)
     friends = db.Column(ARRAY(db.Integer))
     posts = db.relationship('Post', backref='author', lazy=True, cascade='all,delete')
-    
+    def add_friend(self, user_id):
+        self.friends.append(user_id)
+        flag_modified(self,'friends')
     def set_password(self,password):
         self.password = bcrypt.generate_password_hash(password).decode('utf-8')
 
@@ -32,7 +34,7 @@ class Post(db.Model):
     __tablename__ = 'post'
     id = db.Column(db.Integer,primary_key = True)
     title = db.Column(db.String(50), nullable = False)
-    content = db.Column(db.String(300))
+    content = db.Column(db.Text)
     date_posted = db.Column(db.DateTime, nullable = False, default = datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     privacy = db.Column(db.String(1), default = 0)

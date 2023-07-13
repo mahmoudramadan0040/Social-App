@@ -7,7 +7,8 @@ class PostFrom(FlaskForm):
     title = StringField(
         'title',
         validators=[
-            DataRequired()
+            DataRequired(),
+            Length(min=5, max=50)
         ]
     )
     content = TextAreaField(
@@ -18,6 +19,12 @@ class PostFrom(FlaskForm):
     )
     date_posted =DateField(
         'date_posted'
+    )
+    privacy = StringField(
+        'privacy',
+        validators=[
+            DataRequired()
+        ]
     )
     submit = SubmitField(
         'Save Post'

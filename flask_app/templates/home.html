@@ -22,16 +22,14 @@
             <div>you have no friends yet</div>
             {% endif %}
             {% for post in posts %} 
-            <div class="card mb-3" style="width:100%">
+            <div class="card mb-3 card_post" style="width:100%">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
-                       
+                        <img  class="post-image me-2" src="{{post.User.photo}}"/>
                         <div class="d-block title_date ">
                             <div> {{post.User.username}} </div>
                             <div style="font-size: smaller;font-weight: 400;"> {{post.Post.date_posted}}</div>
                         </div>
-                        
-                        <img  class="post-image me-2" src="{{post.User.photo}}"/>
                     </div>
                   
                   <h4 class="card-subtitle mb-2 post_title ">{{post.Post.title}}</h4>

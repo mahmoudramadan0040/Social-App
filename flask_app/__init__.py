@@ -14,11 +14,11 @@ app.config['SECRET_KEY'] = 'W9MZ9FbVYKXHPDVqpvtkl1i16dnU3MWr'
 bcrypt = Bcrypt(app)
 
 #setting an upload folder
-UPLOAD_FOLDER = '/home/karim/ITI/18-Flask/Flask_social_media/flask_app/static/images/'
+UPLOAD_FOLDER = 'C:/Users/mahmo/Downloads/flask/Flask_social_media/flask_app/static/images/'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #setting up the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:18501900@localhost:5432/flask_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:moon@localhost:5432/FlaskDB'
 db = SQLAlchemy(app)
 
 # setting up LoginManager

@@ -1,53 +1,69 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div style = "display: flex; justify-content: space-between;">
-  <div class="picture" style="margin-left: 25px;">
-    <img src="{{  user.photo }}" alt="test">
-    <div>{{ user.username }}</div>
-    <a href="{{url_for('edit')}}" class="btn btn-dark"> edit </a>
-  </div>
-  <form method="post" class="profile-form">
-    <div style="display: flex; justify-content: space-between;">
-      <label for="title">Title</label>
-      <input type="text" id="title" name = "title" required>
-    </div>
-   <div style="display: flex; justify-content: space-between;">
-      <label for="content">Content</label>
-      <input type="text" id="content" name="content" required>
-   </div>
-   <div style="display: flex; justify-content: space-between;">
-    <label for="privacy">Privacy</label>
-    <select name="privacy" id="privacy">
-      <option value="0">Public</option>
-      <option value="1">Friends Only</option>
-      <option value="2">Only me</option>
-    </select>
-   </div>
-    <input type="submit" value="add new post" class="btn btn-outline-secondary">
-  </form>
-</div>
 
-<div>
-  {% for post in posts %}
-  <div class="card mb-3" style="width:100%">
-    <div class="card-body">
-        <div class="d-flex align-items-center mb-3">
-            <img  class="post-image me-2" src="{{ current_user.photo }}"/>
-            <div class="d-block title_date ">
-                <div> {{ current_user.username }} </div>
-                <div style="font-size: smaller;font-weight: 400;"> {{ post.date_posted }} </div>
-            </div>
-        </div>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-lg-7 col-md-6 col-sm-12 col-12">
+      <div class="mb-5 d-flex card_profile" >
+        
+          <img class="profile_image" src="{{ user.photo }}" alt="image profile">
+          <div class="m-3">
+            <div class="profile_title">{{ user.username }}</div>
+            <a href="{{url_for('edit')}}" class="btn btn-outline-primary edit_btn"> edit </a>
+          </div>
+          
+        
       
-      <h4 class="card-subtitle mb-2 post_title ">{{ post.title }}</h4>
-      <p class="card-text"> {{ post.content }} </p>
+        
+      </div>
+      <h3 class="profile_title"> My Posts </h3>
+      {% for post in posts %}
+      <div class="card mb-3 profile_card_post" style="width:100%">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-3">
+              <img  class="post-image me-2" src="{{ current_user.photo }}"/>
+              <div class="d-block title_date ">
+                  <div> {{ current_user.username }} </div>
+                  <div style="font-size: smaller;font-weight: 400;"> {{ post.date_posted }} </div>
+              </div>
+          </div>
+          <h4 class="card-subtitle mb-2 post_title ">{{ post.title }}</h4>
+          <p class="card-text"> {{ post.content }} </p>
+          <div class="d-flex justify-content-end">
+            <a href="/delete/post/{{post.id}}" class="btn btn-danger btn-sm m-1"> Delete </a>
+            <a href="/post/update/{{post.id}}" class="btn btn-primary btn-sm m-1"> Update </a>
+          </div>
+        </div>
+        
+      </div>
+      {% endfor %}
     </div>
-    <div>
-      <a href="/delete/post/{{post.id}}" class="btn btn-danger"> Delete </a>
-      <a href="/post/update/{{post.id}}" class="btn btn-warning"> Update </a>
+    <div class="col-lg-5 col-md-6 col-sm-12 col-12">
+      <form method="post" class="profile_form_post p-3 ">
+        <div  class="form-group mt-3">
+          <label for="title" class="form-control-label">Titles</label>
+          <input type="text" class="form-control" id="title" name = "title" required maxlength="50" >
+        
+        </div>
+        
+       <div class="form-group mt-3">
+          <label for="content" class="form-control-label">Content</label>
+          <textarea  type="text-area" class="form-control" id="content" name="content" required></textarea>
+       </div>
+       <div class="form-group mt-3">
+        <label for="privacy" class="form-control-label">Privacy</label>
+        <select name="privacy" class="form-control" id="privacy">
+          <option value="0">Public</option>
+          <option value="1">Friends Only</option>
+          <option value="2">Only me</option>
+        </select>
+       </div>
+        <input type="submit" value="add new post" class="btn btn-outline-secondary mt-3">
+      </form>
     </div>
-</div>
-  {% endfor %}
+  </div>
+
 </div>
 {% endblock %}

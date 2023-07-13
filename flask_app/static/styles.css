@@ -86,7 +86,7 @@ div.flex {
 fieldset{
   border: none;
 }
-form_title{
+.form_title{
   color:rgb(0, 121, 227);
   font-family: 'Times New Roman', Times, serif;
   font-weight: bold;
@@ -108,7 +108,7 @@ legend{
   
   margin: auto;
   border:none;
-  box-shadow: 0px 30px 70px rgba(48, 150, 245, 0.1);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 .card_post:hover{
   width: fit-content;
@@ -116,7 +116,7 @@ legend{
   
   margin: auto;
   border:none;
-  box-shadow: 0px 30px 70px rgba(48, 150, 245, 0.1);
+  box-shadow: rgba(48, 150, 245, 0.1) 0px 5px 15px; ;
   border: 1px solid  rgb(0, 121, 227);
   height: max-content !important;
 }
@@ -127,10 +127,7 @@ input{
   margin-top: .3em;
   margin-bottom: .3em;
 }
-input:s{
-  border: 1px solid #cecece;
-}
-form_btn{
+.form_btn{
     width: 100%;
     border: none;
     padding:1em;
@@ -138,4 +135,74 @@ form_btn{
     background-color: #000;
     margin-top:2em;
     font-size: 1.1em;
+}
+.card_profile{
+  /* width: fit-content; */
+  border:none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  /* height: 300px; */
+  
+}
+.profile_image{
+  border-radius:50%;
+  object-fit: cover;
+  height: 100px;
+  width: 100px;
+  
+  margin: 30px;
+  margin-top: 20px;
+}
+.profile_title{
+  color:  rgb(0, 121, 227);
+  font-size: 2em;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+.profile_title::first-letter {
+  text-transform: capitalize;
+}
+.edit_btn{
+  width: 100px;
+}
+.profile_card_post{
+  width: fit-content;
+  min-width: 400px;
+  margin: auto;
+  border:none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 5px;
+  
+}
+.profile_form_post{
+  /* width: fit-content; */
+  min-width: 400px;
+  margin: auto;
+  border:none;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 5px;
+}
+.edit_profile_form_post{
+  width: fit-content;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 5px;
+  padding: .8em;
+}
+.explore-user{
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 5px;
+  margin: 1em;
+  padding: .6em;
+  /* width: fit-content; */
+  margin: auto;
+  border-radius: 5px;
+
+}
+.user_img{
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-left:.5em ;
+  margin-right:.5em ;
+}
+.user_title{
+  margin-left:.5em ;
+  margin-right:.5em ;
 }

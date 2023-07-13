@@ -19,12 +19,12 @@ def home():
                 posts = db.session.query(User, Post)\
                     .outerjoin(User, User.id == Post.user_id)\
                     .filter(and_(Post.user_id.in_(current_user.friends), Post.privacy.in_(["1","0"]))).all()
+                friends = User.query.filter(User.id.in_(current_user.friends) ).all()
+                print(friends)
             else:
                 posts = []
-            
-            friends = User.query.filter(User.id.in_(current_user.friends) ).all()
-            print(friends)
-           
+                friends=[]
+
         else :
             posts = db.session.query(
             Post,
@@ -110,7 +110,7 @@ def profile():
 @app.route('/friendrequests')
 def friend_requests():
     requests = FriendRequests.query.filter_by(reciever = current_user.id).all()
-    senders = User.query.join(FriendRequests, User.id == FriendRequests.sender).all()
+    senders = User.query.join(FriendRequests, User.id.in_([req.sender for req in requests])).all()
     return render_template('friendrequests.html',requests = senders)
 
 
@@ -124,6 +124,7 @@ def create_post():
                 content =form.content.data,
                 date_posted = form.date_posted.data,
                 user_id=current_user.id,
+                privacy = form.privacy.data
             )
             db.session.add(new_post)
             db.session.commit()
@@ -210,7 +211,7 @@ def addFriend(id):
             db.session.add(request)
             db.session.commit()
             flash("firent request was send successfully","success")
-            return redirect(url_for('explore'))                  
+            return redirect(url_for('explore'))               
     
 @app.route('/accept/<int:id>')
 @login_required
@@ -224,7 +225,9 @@ def accept(id):
            current_user.friends = [] 
            current_user.friends.append(id)
         else:
-           current_user.friends.append(id)
+           current_user.add_friend(id)
+           db.session.add(current_user)
+           db.session.commit()
         db.session.delete(sender)
         db.session.commit()
         return redirect(url_for('friend_requests'))
