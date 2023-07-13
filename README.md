@@ -49,7 +49,7 @@ https://youtu.be/CREVECnXTY4
 ## How To run 
 1- create virtual environment using this command 
 > pip install virtualenv
-> python<version> -m venv <virtual-environment-name>
+> python<version> -m venv [virtual-environment-name]
 2- install all requirement pakage using this command
 > pip install -r requirements.txt
 3- add .env file then add this inside
