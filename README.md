@@ -65,7 +65,7 @@ https://youtu.be/CREVECnXTY4
      FLASK_APP=start.py
      FLASK_DEBUG=1
 ```
-5- change connect string that inside __init__ file in project to connect string your Db
+5- change connect string that inside '__init__' file in project to connect string your Db
 ```
      'postgresql://postgres:[password]@localhost:5432/[your-database-name ]'
 ```
