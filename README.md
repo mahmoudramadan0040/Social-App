@@ -48,13 +48,32 @@ https://youtu.be/CREVECnXTY4
 
 ## How To run 
 1- create virtual environment using this command 
-    > pip install virtualenv
-    > python<version> -m venv [virtual-environment-name]
-2- install all requirement pakage using this command
-    > pip install -r requirements.txt
-3- add .env file then add this inside
-    > FLASK_APP=start.py
-    > FLASK_DEBUG=1
-4- change connect string that inside __init__ file in project to connect string your Db
-    > 'postgresql://postgres:[password]@localhost:5432/[database name ]'
-5- 
+```
+     pip install virtualenv
+     python<version> -m venv [virtual-environment-name]
+```
+2- then activate this environment using this command 
+```
+    . venv/Scripts/activate
+```
+3- install all requirement pakage using this command
+```
+     pip install -r requirements.txt
+```
+4- add .env file then add this inside
+```
+     FLASK_APP=start.py
+     FLASK_DEBUG=1
+```
+5- change connect string that inside __init__ file in project to connect string your Db
+```
+     'postgresql://postgres:[password]@localhost:5432/[your-database-name ]'
+```
+6- run this file to create database 
+```
+    python run_db create_db
+```
+7- finally run this command to run project 
+```
+    flask run 
+```
