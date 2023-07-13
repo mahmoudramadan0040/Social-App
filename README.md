@@ -46,4 +46,15 @@ https://youtu.be/CREVECnXTY4
 
 ![Capture6](https://github.com/mahmoudramadan0040/Social-App/assets/95087747/8010a5d7-efac-44b3-875e-468d48ca4cd0)
 
-
+## How To run 
+1- create virtual environment using this command 
+> pip install virtualenv
+> python<version> -m venv <virtual-environment-name>
+2- install all requirement pakage using this command
+> pip install -r requirements.txt
+3- add .env file then add this inside
+> FLASK_APP=start.py
+> FLASK_DEBUG=1
+4- change connect string that inside __init__ file in project to connect string your Db
+> 'postgresql://postgres:[password]@localhost:5432/[database name ]'
+5- 
