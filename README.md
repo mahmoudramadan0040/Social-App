@@ -1,6 +1,6 @@
 # Flask_social_media
 ## Requirement Features
-'''
+```
 * Create a social media website that has the following features:
     > user login,logout and registration system (using login_manager)
     > secure database record insertion
@@ -12,4 +12,4 @@
         > delete posts
         > update posts
         > update user's own info
-'''
+```
